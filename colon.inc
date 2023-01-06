@@ -11,6 +11,7 @@
 ;       - arg2: assembly label name
 %macro colon 2
 %%next_entry: dq next_entry
-etr_ %+ %2: db %1
+db %1, 0
+etr_ %+ %2: 
 %define next_entry %%next_entry
 %endmacro
