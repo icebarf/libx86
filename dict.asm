@@ -17,10 +17,10 @@ global find_word
 
 extern strcmp
 
-; find_word - arg1: pointer to null-terminated `key` string
-;           - arg2: pointer to last entry in dictionary/list
-;           returns a pointer to the address of the entry of the key if found
-;               otherwise, a zero is returned
+; find_word - rdi: pointer to null-terminated `key` string
+;           - rsi: pointer to last entry in dictionary/list
+;             returns a pointer to the address of the entry of the key 
+;             if found otherwise, a zero is returned
 find_word:
     xor rax, rax
 .find:
