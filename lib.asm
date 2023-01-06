@@ -1,10 +1,19 @@
-;    This file is part of libx86.
-;    libx86 is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-;    libx86 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
-;    You should have received a copy of the GNU Affero General Public License along with libx86. If not, see <https://www.gnu.org/licenses/>. 
+;This file is part of libx86.
+;libx86 is free software: you can redistribute it and/or modify it under the 
+;terms of the GNU Affero General Public License as published by the Free 
+;Software Foundation, either version 3 of the License, or (at your option) 
+;any later version.
+;libx86 is distributed in the hope that it will be useful, but 
+; WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+;or FITNESS FOR A PARTICULAR PURPOSE. 
+;See the GNU Affero General Public License for more details.
+;You should have received a copy of the 
+;GNU Affero General Public License along with libx86. 
+;If not, see <https://www.gnu.org/licenses/>. 
 
 global exit
 global print_string
+global print_nstring
 global print_char
 global print_newline
 global print_uint64
@@ -83,6 +92,17 @@ strcpy:
 print_string:
     call strlen
     mov rdx, rax ; third argument 
+    mov rax, 1  ; write()
+    mov rsi, rdi    ; string buffer to print, is second argument
+    mov rdi, 1  ; file descriptor for stdout, is first argument
+    syscall
+    ret
+
+; prints a null-terminated string of size `n`
+;   - rdi: null terminated string
+;   - rsi: size of string `n`
+print_nstring:
+    mov rdx, rsi    ; arg 3 - buffer len
     mov rax, 1  ; write()
     mov rsi, rdi    ; string buffer to print, is second argument
     mov rdi, 1  ; file descriptor for stdout, is first argument
