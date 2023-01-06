@@ -28,13 +28,16 @@ global strcpy
 
 
 ; calls the exit() syscall as specified by POSIX
+;   rdi: exit code
 exit:
     mov rax, 60
     syscall
     ret
 
 
-; returns the length of string
+;   returns the length of string
+;   rdi: pointer to null-terminated string
+;   returns: rax - length of string
 strlen:
     mov rax, -1
 .loop:
@@ -44,7 +47,10 @@ strlen:
     ret
 
 
-; pass two pointers to strings. 1 on equality, otherwise 0
+;   compare two strings for equality.
+;   rdi: pointer to null-terminated string (1)
+;   rsi: pointer to null-terminated string (2)
+;   returns: rax - if equal: 1 else 0
 strcmp:
     mov r9b, byte [rsi]
     cmp byte[rdi], r9b
@@ -60,8 +66,8 @@ strcmp:
     ret
 
 
-; arg1: src_string  arg2: dest_buffer  arg3: buffer_size
-; return - on_success: buffer address (arg2)  on_failure: zero
+; rdi: src_string  rsi: dest_buffer  rdx: buffer_size
+; returns : rax - on_success: buffer address (arg2)  on_failure: zero
 strcpy:
     push rdi
     push rsi
@@ -89,6 +95,7 @@ strcpy:
 
 
 ; prints a null-terminated string, without any newline at end
+;   rdi: pointer to null-terminated string
 print_string:
     call strlen
     mov rdx, rax ; third argument 
@@ -111,6 +118,7 @@ print_nstring:
 
 
 ; print a char, accepts a immediate passed via anything but not a pointer
+;   rdi: immediate value of character
 print_char:
     push rdi
     mov rdi, rsp
@@ -125,6 +133,7 @@ print_newline:
 
 
 ; prints a 64-bit unsigned number, expects copy of number and not a pointer
+;   rdi: immediate value to print
 print_uint64:
     push r12
     mov rax, rdi ; dividend
@@ -149,6 +158,7 @@ print_uint64:
 
 ; prints a 64-bit signed number, expects copy of number and not a pointer
 ; performed via tail call optimization, thanks wikipedia!
+;   rdi: immediate value to print
 print_int64:
     test rdi, rdi
     jns print_uint64
@@ -187,6 +197,7 @@ parse_uint64:
 
 
 ; same as parse_uint64 but for signed numbers
+; return: rax: number, rdx: count of characters
 parse_int64:
     mov r8b, byte[rdi+rcx]
     cmp r8b, '-'
@@ -205,7 +216,8 @@ parse_int64:
     ret
 
 
-; read one characted from stdin and return it
+; read one character from stdin and return it
+;   rax: character read from stdin
 read_char:
     push 1  ; originally: add rsp, 8
     xor eax, eax  ; read()
@@ -218,6 +230,8 @@ read_char:
 
 
 ; read a word into a buffer, pass pointer to buffer, size of buffer
+;   rdi: pointer to buffer to read into
+;   rsi: size of buffer/number of bytes to be read
 read_word:
     push r13
     push r14
