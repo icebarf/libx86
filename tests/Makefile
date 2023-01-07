@@ -1,15 +1,21 @@
 AS:=nasm
 LD:=ld
-AFLAGS:=-felf64 -Fdwarf -g
+ASFLAGS:=-felf64 -Fdwarf -g
+
 BIN := list
 
-all: $(BIN)
+OBJ :=  main.o      \
+        ../dict.o   \
+        ../lib.o
 
-$(BIN):
-	$(AS) $(AFLAGS) main.asm
-	$(AS) $(AFLAGS) ../lib.asm -o lib.o
-	$(AS) $(AFLAGS) ../dict.asm -o dict.o
-	$(LD) -o $@ lib.o dict.o main.o
+INC :=  words.inc    \
+        ../colon.inc \
+
+$(BIN): $(OBJ)
+	ld -o $(BIN) $^
+
+%.o: %.asm $(INC)
+	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
-	rm *.o $(BIN)
+	rm -f *.o ../*.o $(BIN)
