@@ -1,0 +1,237 @@
+          testing string_length on "asdkbasdka"
+  string_length : compiled
+" asdkbasdka " -> ('', 10)
+  [ [32m  ok  [0m ]
+          testing string_length on "qwe qweqe qe"
+  string_length : compiled
+" qwe qweqe qe " -> ('', 12)
+  [ [32m  ok  [0m ]
+          testing string_length on ""
+  string_length : compiled
+"  " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing print_string on "ashdb asdhabs dahb"
+  print_string : compiled
+" ashdb asdhabs dahb " -> ('ashdb asdhabs dahb', 0)
+  [ [32m  ok  [0m ]
+          testing print_string on " "
+  print_string : compiled
+"   " -> (' ', 0)
+  [ [32m  ok  [0m ]
+          testing print_string on ""
+  print_string : compiled
+"  " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing string_copy on "ashdb asdhabs dahb"
+  string_copy : compiled
+" ashdb asdhabs dahb " -> ('ashdb asdhabs dahb', 0)
+  [ [32m  ok  [0m ]
+          testing string_copy on " "
+  string_copy : compiled
+"   " -> (' ', 0)
+  [ [32m  ok  [0m ]
+          testing string_copy on ""
+  string_copy : compiled
+"  " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing print_char on "a"
+  print_char : compiled
+" a " -> ('a', 0)
+  [ [32m  ok  [0m ]
+          testing print_char on " "
+  print_char : compiled
+"   " -> (' ', 0)
+  [ [32m  ok  [0m ]
+          testing print_char on "c"
+  print_char : compiled
+" c " -> ('c', 0)
+  [ [32m  ok  [0m ]
+          testing print_uint on "-1"
+  print_uint : compiled
+" -1 " -> ('18446744073709551615', 0)
+  [ [32m  ok  [0m ]
+          testing print_uint on "12345234121"
+  print_uint : compiled
+" 12345234121 " -> ('12345234121', 0)
+  [ [32m  ok  [0m ]
+          testing print_uint on "0"
+  print_uint : compiled
+" 0 " -> ('0', 0)
+  [ [32m  ok  [0m ]
+          testing print_uint on "12312312"
+  print_uint : compiled
+" 12312312 " -> ('12312312', 0)
+  [ [32m  ok  [0m ]
+          testing print_uint on "123123"
+  print_uint : compiled
+" 123123 " -> ('123123', 0)
+  [ [32m  ok  [0m ]
+          testing print_int on "-1"
+  print_int : compiled
+" -1 " -> ('-1', 0)
+  [ [32m  ok  [0m ]
+          testing print_int on "-12345234121"
+  print_int : compiled
+" -12345234121 " -> ('-12345234121', 0)
+  [ [32m  ok  [0m ]
+          testing print_int on "0"
+  print_int : compiled
+" 0 " -> ('0', 0)
+  [ [32m  ok  [0m ]
+          testing print_int on "123412312"
+  print_int : compiled
+" 123412312 " -> ('123412312', 0)
+  [ [32m  ok  [0m ]
+          testing print_int on "123123"
+  print_int : compiled
+" 123123 " -> ('123123', 0)
+  [ [32m  ok  [0m ]
+          testing read_char on "-1"
+  read_char : compiled
+" -1 " -> ('', 45)
+  [ [32m  ok  [0m ]
+          testing read_char on "-1234asdasd5234121"
+  read_char : compiled
+" -1234asdasd5234121 " -> ('', 45)
+  [ [32m  ok  [0m ]
+          testing read_char on ""
+  read_char : compiled
+"  " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing read_char on "   "
+  read_char : compiled
+"     " -> ('', 32)
+  [ [32m  ok  [0m ]
+          testing read_char on "	   "
+  read_char : compiled
+" 	    " -> ('', 9)
+  [ [32m  ok  [0m ]
+          testing read_char on "hey ya ye ya"
+  read_char : compiled
+" hey ya ye ya " -> ('', 104)
+  [ [32m  ok  [0m ]
+          testing read_char on "hello world"
+  read_char : compiled
+" hello world " -> ('', 104)
+  [ [32m  ok  [0m ]
+          testing read_word on "-1"
+  read_word : compiled
+" -1 " -> ('-1', 0)
+  [ [32m  ok  [0m ]
+          testing read_word_length on "-1"
+  read_word_length : compiled
+" -1 " -> ('', 2)
+  [ [32m  ok  [0m ]
+          testing read_word_length on "-1234asdasd5234121"
+  read_word_length : compiled
+" -1234asdasd5234121 " -> ('', 18)
+  [ [32m  ok  [0m ]
+          testing read_word_length on ""
+  read_word_length : compiled
+"  " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing read_word_length on "   "
+  read_word_length : compiled
+"     " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing read_word_length on "	   "
+  read_word_length : compiled
+" 	    " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing read_word_length on "hey ya ye ya"
+  read_word_length : compiled
+" hey ya ye ya " -> ('', 3)
+  [ [32m  ok  [0m ]
+          testing read_word_length on "hello world"
+  read_word_length : compiled
+" hello world " -> ('', 5)
+  [ [32m  ok  [0m ]
+          testing read_word_too_long on "asdbaskdbaksvbaskvhbashvbasdasdads wewe"
+  read_word_too_long : compiled
+" asdbaskdbaksvbaskvhbashvbasdasdads wewe " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing read_word_too_long on "short"
+  read_word_too_long : compiled
+" short " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing parse_uint on "0"
+  parse_uint : compiled
+" 0 " -> ('0', 1)
+  [ [32m  ok  [0m ]
+          testing parse_uint on "1234567890987654321hehehey"
+  parse_uint : compiled
+" 1234567890987654321hehehey " -> ('1234567890987654321', 19)
+  [ [32m  ok  [0m ]
+          testing parse_uint on "1"
+  parse_uint : compiled
+" 1 " -> ('1', 1)
+  [ [32m  ok  [0m ]
+          testing parse_int on "0"
+  parse_int : compiled
+" 0 " -> ('0', 1)
+  [ [32m  ok  [0m ]
+          testing parse_int on "1234567890987654321hehehey"
+  parse_int : compiled
+" 1234567890987654321hehehey " -> ('1234567890987654321', 19)
+  [ [32m  ok  [0m ]
+          testing parse_int on "-1dasda"
+  parse_int : compiled
+" -1dasda " -> ('-1', 2)
+  [ [32m  ok  [0m ]
+          testing parse_int on "-eedea"
+  parse_int : compiled
+" -eedea " -> ('0', 0)
+  [ [32m  ok  [0m ]
+          testing parse_int on "-123123123"
+  parse_int : compiled
+" -123123123 " -> ('-123123123', 10)
+  [ [32m  ok  [0m ]
+          testing parse_int on "1"
+  parse_int : compiled
+" 1 " -> ('1', 1)
+  [ [32m  ok  [0m ]
+          testing string_equals on "ashdb asdhabs dahb"
+  string_equals : compiled
+" ashdb asdhabs dahb " -> ('', 1)
+  [ [32m  ok  [0m ]
+          testing string_equals on " "
+  string_equals : compiled
+"   " -> ('', 1)
+  [ [32m  ok  [0m ]
+          testing string_equals on ""
+  string_equals : compiled
+"  " -> ('', 1)
+  [ [32m  ok  [0m ]
+          testing string_equals on "asd"
+  string_equals : compiled
+" asd " -> ('', 1)
+  [ [32m  ok  [0m ]
+          testing string_equals not equals on "ashdb asdhabs dahb"
+  string_equals not equals : compiled
+" ashdb asdhabs dahb " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing string_equals not equals on " "
+  string_equals not equals : compiled
+"   " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing string_equals not equals on ""
+  string_equals not equals : compiled
+"  " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing string_equals not equals on "asd"
+  string_equals not equals : compiled
+" asd " -> ('', 0)
+  [ [32m  ok  [0m ]
+          testing string_copy_too_long on "ashdb asdhabs dahb"
+  string_copy_too_long : compiled
+" ashdb asdhabs dahb " -> ('string is too long\n', 0)
+  [ [32m  ok  [0m ]
+          testing string_copy_too_long on " "
+  string_copy_too_long : compiled
+"   " -> ('string is too long\n', 0)
+  [ [32m  ok  [0m ]
+          testing string_copy_too_long on ""
+  string_copy_too_long : compiled
+"  " -> ('string is too long\n', 0)
+  [ [32m  ok  [0m ]
+[32mGood work, all tests are passed[0m
