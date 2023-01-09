@@ -183,7 +183,7 @@ parse_uint64:
     jb .end
     cmp r8b, '9'
     jg .end
-    xor rdx, rdx    ; clear rdx just like div
+    xor rdx, rdx    
     mul r10
     and r8, 0x0f    ; normal value, numbers are in range 0x30-0x39
                     ; so getting rid of upper half should result in
@@ -201,6 +201,8 @@ parse_uint64:
 ;   rdi: null terminated string containing number in ascii
 ;   return: rax: number, rdx: count of characters
 parse_int64:
+    xor rcx, rcx
+    xor rax, rax
     mov r8b, byte[rdi+rcx]
     cmp r8b, '-'
     je .neg_num
@@ -221,30 +223,40 @@ parse_int64:
 ; read one character from stdin and return it
 ;   rax: character read from stdin
 read_char:
-    push 1  ; originally: add rsp, 8
+    push rbp
+    mov rbp, rsp
+    push 0        ; reserve bytes to read into
     xor eax, eax  ; read()
     xor edi, edi  ; stdin
     mov rsi, rsp  ; buffer
     mov rdx, 1    ; count
     syscall
-    pop rax ; originally: mov rax, [rsp] ; sub rsp, 8
+    pop rax ; mov into rsp, sub rsp, 8
+    pop rbp
     ret
 
 
 ; read a word into a buffer, pass pointer to buffer, size of buffer
 ;   rdi: pointer to buffer to read into
 ;   rsi: size of buffer/number of bytes to be read
+;   return - rax: pointer to buffer word was read into
+;            rdx: number of characters read
 read_word:
     push r13
     push r14
     push r15
+
+    test rsi, rsi   ; buffer size shouldn't be zero
+    jz .end_basic
+
     xor r13, r13 ; counter
     mov r14, rdi ; buffer
     mov r15, rsi ; size
     dec r15
 .check_whitespaces_start:
     call read_char
-    cmp al, 0x20
+
+    cmp al, 0x20                ; whitespace checks
     je .check_whitespaces_start
     cmp al, 0xa
     je .check_whitespaces_start
@@ -252,14 +264,17 @@ read_word:
     je .check_whitespaces_start
     cmp al, 0xd
     je .check_whitespaces_start
-    cmp al, 0x4
+
+    cmp al, 0x4                 ; stream end and zero checks
     je .end
     test al, al
     je .end
+
     mov byte [r14+r13], al
     inc r13
 .read_more:
     call read_char
+
     cmp al, 0x20
     je .end
     cmp al, 0xa
@@ -272,13 +287,18 @@ read_word:
     je .end
     test al, al
     je .end
-    cmp r13, r15
-    jge .end
+
+    cmp r13, r15    ; if we're still parsing a word but our buffer has run out.
+    jge .end_basic
+
     mov byte [r14+r13], al
     inc r13
     jmp .read_more
 .end_basic:
     xor eax, eax
+    xor rdx, rdx
+    pop r15
+    pop r14
     pop r13
     ret
 .end:
