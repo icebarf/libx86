@@ -171,7 +171,8 @@ print_int64:
 
 
 ; parses an unsigned integer
-; return: rax: number, rdx: count of characters
+;   rdi: null terminated string containing number in ascii
+;   return: rax: number, rdx: count of characters
 parse_uint64:
     xor rax, rax
     xor rcx, rcx
@@ -197,7 +198,8 @@ parse_uint64:
 
 
 ; same as parse_uint64 but for signed numbers
-; return: rax: number, rdx: count of characters
+;   rdi: null terminated string containing number in ascii
+;   return: rax: number, rdx: count of characters
 parse_int64:
     mov r8b, byte[rdi+rcx]
     cmp r8b, '-'
