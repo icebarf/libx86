@@ -225,13 +225,14 @@ parse_int64:
 read_char:
     push rbp
     mov rbp, rsp
-    push 0        ; reserve bytes to read into
+    sub rsp, 1
     xor eax, eax  ; read()
     xor edi, edi  ; stdin
     mov rsi, rsp  ; buffer
     mov rdx, 1    ; count
     syscall
-    pop rax ; mov into rsp, sub rsp, 8
+    mov al, [rsp]
+    add rsp, 1
     pop rbp
     ret
 
