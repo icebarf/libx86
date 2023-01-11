@@ -14,11 +14,11 @@
 
 %define COL_NEXT_ENTRY 0
 
-; colon - create a dictionary word/entry
+; llentry - create a dictionary word/entry
 ;       - takes two arguments
 ;       - arg1: key value, null-terminated string
 ;       - arg2: assembly label name
-%macro colon 2
+%macro llentry 2
 %strlen key_len %1
 
 %%COL_NEXT_ENTRY: dq COL_NEXT_ENTRY
