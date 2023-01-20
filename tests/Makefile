@@ -11,11 +11,13 @@ OBJ :=  main.o      \
 INC :=  words.inc    \
         ../colon.inc \
 
+all: $(BIN)
+
+$(OBJ): %.o : %.asm
+	$(AS) $(ASFLAGS) $< -o $@
+
 $(BIN): $(OBJ)
 	ld -o $(BIN) $^
-
-%.o: %.asm $(INC)
-	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
 	rm -f *.o ../*.o $(BIN)
