@@ -150,7 +150,7 @@ print_uint64:
     jnz .loop
     call print_string
     add rsp, 20 + 1
-    pop byte r12
+    pop r12b
     pop r12
     ret
 
