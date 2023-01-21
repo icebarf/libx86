@@ -149,8 +149,7 @@ print_uint64:
     test rax, rax
     jnz .loop
     call print_string
-    add rsp, 20 + 1
-    pop r12
+    add rsp, 20 + 2
     pop r12
     ret
 
