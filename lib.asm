@@ -138,8 +138,9 @@ print_uint64:
     mov rax, rdi ; dividend
     mov r12, 10  ; divisor
     mov rdi, rsp
-    push byte 0
-    sub rsp, 20 + 1 ; 2^64 ~20 bytes, 1 byte null terminator
+    sub rsp, 1
+    mov byte [rsp], 0
+    sub rsp, 20 ; 2^64 ~20 bytes, 1 byte null terminator
 .loop:
     xor rdx, rdx
     div r12
@@ -150,7 +151,6 @@ print_uint64:
     jnz .loop
     call print_string
     add rsp, 20 + 1
-    pop r12b
     pop r12
     ret
 
