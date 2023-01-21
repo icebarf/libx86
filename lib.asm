@@ -134,12 +134,13 @@ print_newline:
 ; prints a 64-bit unsigned number, expects copy of number and not a pointer
 ;   rdi: immediate value to print
 print_uint64:
-    push r12
+    push rbp
+    mov rbp, rsp
     mov rax, rdi ; dividend
-    mov r12, 10  ; divisor
-    mov rdi, rsp
+    mov r8, 10  ; divisor
     sub rsp, 1
     mov byte [rsp], 0
+    mov rdi, rsp
     sub rsp, 20 ; 2^64 ~20 bytes, 1 byte null terminator
 .loop:
     xor rdx, rdx
@@ -151,7 +152,7 @@ print_uint64:
     jnz .loop
     call print_string
     add rsp, 20 + 1
-    pop r12
+    pop rbp
     ret
 
 
