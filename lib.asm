@@ -138,7 +138,7 @@ print_uint64:
     mov rax, rdi ; dividend
     mov r12, 10  ; divisor
     mov rdi, rsp
-    push 0
+    push byte 0
     sub rsp, 20 + 1 ; 2^64 ~20 bytes, 1 byte null terminator
 .loop:
     xor rdx, rdx
