@@ -144,7 +144,7 @@ print_uint64:
     sub rsp, 20 ; 2^64 ~20 bytes, 1 byte null terminator
 .loop:
     xor rdx, rdx
-    div r12
+    div r8
     or rdx, 0x30 ; ascii value of remainder: add rdx, 0x30
     dec rdi
     mov byte [rdi], dl   ; save on the stack
@@ -154,7 +154,6 @@ print_uint64:
     add rsp, 20 + 1
     pop rbp
     ret
-
 
 ; prints a 64-bit signed number, expects copy of number and not a pointer
 ; performed via tail call optimization, thanks wikipedia!
