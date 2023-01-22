@@ -220,7 +220,7 @@ parse_int64:
 
 
 ; read one character from stdin and return it
-;   rax: character read from stdin
+;   return - rax: character read from stdin
 read_char:
     push rbp
     mov rbp, rsp
@@ -230,7 +230,7 @@ read_char:
     mov rsi, rsp  ; buffer
     mov rdx, 1    ; count
     syscall
-    mov al, [rsp]
+    movzx rax, byte[rsp]
     add rsp, 1
     pop rbp
     ret
