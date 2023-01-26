@@ -19,12 +19,12 @@
 %macro llentry 2
 %strlen key_len %1
 
-%%COL_PREV_ENTRY: dq COL_NEXT_ENTRY
+%%COL_PREV_ENTRY: dq COL_PREV_ENTRY
 dq key_len
 db %1, 0
 etr_ %+ %2: 
 
-%define COL_PREV_ENTRY %%COL_NEXT_ENTRY
+%define COL_PREV_ENTRY %%COL_PREV_ENTRY
 %endmacro
 
 ; linked list structure is as follows
