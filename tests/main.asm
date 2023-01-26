@@ -1,15 +1,11 @@
+%include "../lib.inc"
+%include "../dict.inc"
 %include "words.inc"
 
 section .data
 ERR: db "Key value not found in dictionary", 0
 
 section .text
-extern read_word
-extern exit
-extern find_word
-extern print_string
-extern print_nstring
-extern print_newline
 
 global _start
 _start:
@@ -22,7 +18,7 @@ _start:
     call read_word
 
     mov rdi, rsp
-    mov rsi, COL_NEXT_ENTRY ; from words.inc -> entry.inc
+    mov rsi, COL_PREV_ENTRY ; from words.inc -> entry.inc
     call find_word
     cmp rax, 0
     jz .bad_end
