@@ -10,7 +10,7 @@
 ;;  You should have received a copy of the GNU General Public License 
 ;;  along with this program. If not, see <https://www.gnu.org/licenses/>. 
 
-%define COL_NEXT_ENTRY 0
+%define COL_PREV_ENTRY 0
 
 ; llentry - create a dictionary word/entry
 ;       - takes two arguments
@@ -19,17 +19,17 @@
 %macro llentry 2
 %strlen key_len %1
 
-%%COL_NEXT_ENTRY: dq COL_NEXT_ENTRY
+%%COL_PREV_ENTRY: dq COL_NEXT_ENTRY
 dq key_len
 db %1, 0
 etr_ %+ %2: 
 
-%define COL_NEXT_ENTRY %%COL_NEXT_ENTRY
+%define COL_PREV_ENTRY %%COL_NEXT_ENTRY
 %endmacro
 
 ; linked list structure is as follows
 ;struct entry {
-;   uintptr_t COL_NEXT_ENTRY; /* expected to be 8 bytes on x86_64 */
+;   uintptr_t COL_PREV_ENTRY; /* expected to be 8 bytes on x86_64 */
 ;   uint64_t key_len;     /* length of the key string, also 8 bytes */
 ;   char* key;            /* key array - null terminated string */
 ;   ...                   /* data stored, access via skipping over the data
