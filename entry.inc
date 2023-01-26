@@ -10,6 +10,9 @@
 ;;  You should have received a copy of the GNU General Public License 
 ;;  along with this program. If not, see <https://www.gnu.org/licenses/>. 
 
+%ifndef LIBX86_LINKED_LIST_ENTRY_IMPL
+%define LIBX86_LINKED_LIST_ENTRY_IMPL
+
 %define COL_PREV_ENTRY 0
 
 ; llentry - create a dictionary word/entry
@@ -26,6 +29,8 @@ etr_ %+ %2:
 
 %define COL_PREV_ENTRY %%COL_PREV_ENTRY
 %endmacro
+
+%endif
 
 ; linked list structure is as follows
 ;struct entry {

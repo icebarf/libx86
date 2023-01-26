@@ -10,6 +10,9 @@
 ;;  You should have received a copy of the GNU General Public License 
 ;;  along with this program. If not, see <https://www.gnu.org/licenses/>. 
 
+%ifndef LIBX86_SELF_DECL
+%define LIBX86_SELF_DECL
+
 global exit
 global print_string
 global print_nstring
@@ -26,6 +29,8 @@ global strcmp
 global strcpy
 
 
+%ifndef LIBX86_SELF_IMPL
+%define LIBX86_SELF_IMPL
 ; calls the exit() syscall as specified by POSIX
 ;   rdi: exit code
 exit:
@@ -309,3 +314,6 @@ read_word:
     pop r14
     pop r13
     ret
+
+%endif
+%endif

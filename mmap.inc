@@ -10,6 +10,9 @@
 ;;  You should have received a copy of the GNU General Public License 
 ;;  along with this program. If not, see <https://www.gnu.org/licenses/>. 
 
+%ifndef LIBX86_MMAP_CONSTANTS_IMPL
+%define LIBX86_MMAP_CONSTANTS_IMPL
+
 ; open() flags
 %define O_RDONLY 00
 %define O_WRONLY 01
@@ -26,3 +29,5 @@
 %define MAP_PRIVATE	0x02		
 
 %define LINUX_PAGE_SIZE 4096
+
+%endif
